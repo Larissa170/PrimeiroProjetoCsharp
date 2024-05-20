@@ -1,12 +1,15 @@
 ﻿// Screen sound
 
 
+using System.Xml;
+
 string mensagem = "Bem vindo ao Sreen Sound! \n";
 //List<string> bandas = new List<string> { "AC/DC","Metallica","SouLuna"};
 
 Dictionary<string,List<int>> bandas = new Dictionary<string,List<int>>();
 bandas.Add("AC/DC",new List<int>());
 bandas.Add("Linkin Park", new List<int> { 8,6,10});
+bandas.Add("U2", new List<int> { 8, 6, 10 ,4});
 
 void ExibirMensagem()
 {
@@ -40,7 +43,7 @@ void ExibirOpcoesMenu()
             AvaliarBanda();
             break;
         case 4:
-            Console.WriteLine("Você escolheu " + opcao);
+            CalcularMediaBanda();
             break;
         case -1:
             Console.WriteLine("Tchau.");
@@ -111,6 +114,27 @@ void AvaliarBanda()
 
 }
 
+void CalcularMediaBanda()
+{
+    Console.Clear();
+    ExibirTituloDaOpcao("Média da Banda");
+    Console.Write("Digite o nome da banda que deseja ver a média: ");
+    string nomeBanda = Console.ReadLine()!;
+
+    if (bandas.ContainsKey(nomeBanda))
+    {
+        Console.WriteLine($" a média da banda {nomeBanda} é {bandas[nomeBanda].Average()}");
+
+    }else
+    {
+        Console.WriteLine("\nNão contém esta banda cadastrada");
+    }
+    Console.WriteLine("Digite uma tecla para voltar.");
+    Console.ReadKey();
+    Console.Clear();
+    ExibirOpcoesMenu();
+}
+
 void ExibirTituloDaOpcao(string titulo)
 {
     int quantidadeLetras = titulo.Length; // pega quantas letras tem 
@@ -121,5 +145,4 @@ void ExibirTituloDaOpcao(string titulo)
 }
 
 ExibirOpcoesMenu();
-
 
